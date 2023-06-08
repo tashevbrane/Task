@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="{% url 'filter_reviews' %}" method="post">
+  {% csrf_token %}
+  <label for="prioritize_text">Prioritize by text:</label>
+  <select name="prioritize_text" id="prioritize_text">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+  <br>
+  <label for="rating_order">Rating Order:</label>
+  <select name="rating_order" id="rating_order">
+    <option value="Highest First">Highest First</option>
+    <option value="Lowest First">Lowest First</option>
+  </select>
+  <br>
+  <label for="date_order">Date Order:</label>
+  <select name="date_order" id="date_order">
+    <option value="Newest First">Newest First</option>
+    <option value="Oldest First">Oldest First</option>
+  </select>
+  <br>
+  <label for="min_rating">Minimum Rating:</label>
+  <select name="min_rating" id="min_rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+  <br>
+  <input type="submit" value="Filter">
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rating</th>
+      <th>Text</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for review in reviews %}
+      <tr>
+        <td>{{ review.rating }}</td>
+        <td>{{ review.text }}</td>
+        <td>{{ review.date }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+</body>
+</html>
